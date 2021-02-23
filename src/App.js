@@ -60,13 +60,13 @@ function App() {
   return (
     <div>
       <div className="header">
-        <div className="container d-flex align-items-center py-2">
+        <div className="container d-flex flex-column flex-md-row align-items-center py-2">
           <div className="logo-container">
             <img className="logo" src="/exix_logo.png" alt="Exix" />
           </div>
           <div className="nav">
             <div
-              className={classNames("item dashboard px-5", {
+              className={classNames("item dashboard px-3 px-md-5", {
                 active: activeTab === "dashboard",
               })}
               onClick={(e) => {
@@ -78,7 +78,7 @@ function App() {
               <span>Dashboard</span>
             </div>
             <div
-              className={classNames("item scanner px-5", {
+              className={classNames("item scanner px-3 px-md-5", {
                 active: activeTab === "scanner",
               })}
               onClick={(e) => {
@@ -90,7 +90,7 @@ function App() {
               <span>Scan Pet</span>
             </div>
             <div
-              className={classNames("item new_profile px-5", {
+              className={classNames("item new_profile px-3 px-md-5", {
                 active: activeTab === "new_profile",
               })}
               onClick={(e) => {
@@ -99,7 +99,7 @@ function App() {
               }}
             >
               <i className="material-icons py-1">add_box</i>
-              <span>New Pet Profile</span>
+              <span>New Profile</span>
             </div>
           </div>
         </div>
