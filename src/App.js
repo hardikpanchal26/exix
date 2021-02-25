@@ -94,7 +94,7 @@ function App() {
     },
   ];
 
-  const pets = [
+  const [pets, setPets] = useState([
     {
       id: 0,
       name: "Lussy",
@@ -165,14 +165,14 @@ function App() {
       address:
         "A 602, Yemen Heights, Versova road, Vastral, Ahemdabad - 382415",
     },
-  ];
+  ]);
 
   return (
     <div>
       <Header activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === "dashboard" && <Dashboard pets={visitedPets} />}
-      {activeTab === "pets" && <Pets pets={pets} />}
       {activeTab === "scanner" && <Scanner />}
+      {activeTab === "pets" && <Pets pets={pets} setPets={setPets} />}
     </div>
   );
 }

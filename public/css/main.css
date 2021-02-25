@@ -101,6 +101,9 @@ body {
 .header .container .nav-container .nav .nav-item.active:after {
   background-color: #04c455;
 }
+.pets-section .create-btn {
+  max-width: 400px;
+}
 .pets-section .pets-container {
   margin-top: 24px;
 }
