@@ -7,7 +7,7 @@ import Scanner from "./scanner/Scanner";
 
 function App() {
   const [activeTab, setActiveTab] = useState("dashboard");
-  const visitedPets = [
+  const [visitedPets, setVisitedPets] = useState([
     {
       id: 0,
       name: "Lussy",
@@ -92,7 +92,7 @@ function App() {
       entered_at: "20th Dec 2020, 9:00 am",
       exited_at: "20th Dec 2020, 11:00 am",
     },
-  ];
+  ]);
 
   const [pets, setPets] = useState([
     {
@@ -171,7 +171,9 @@ function App() {
     <div>
       <Header activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === "dashboard" && <Dashboard pets={visitedPets} />}
-      {activeTab === "scanner" && <Scanner />}
+      {activeTab === "scanner" && (
+        <Scanner visitedPets={visitedPets} setVisitedPets={setVisitedPets} />
+      )}
       {activeTab === "pets" && <Pets pets={pets} setPets={setPets} />}
     </div>
   );

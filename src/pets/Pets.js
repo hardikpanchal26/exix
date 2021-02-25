@@ -15,10 +15,6 @@ const Pets = ({ pets, setPets }) => {
     address: "",
   });
 
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
-
   const setFormField = (e, field) => {
     if (field === "name") {
       setFormData({ ...formData, name: e.target.value });

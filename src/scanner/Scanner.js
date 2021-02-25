@@ -1,7 +1,8 @@
 import { useState } from "react";
 import QrReader from "react-qr-reader";
+import dateformat from "dateformat";
 
-const Scanner = () => {
+const Scanner = ({ visitedPets, setVisitedPets }) => {
   const [scanResult, setScanResult] = useState(null);
   const [scanSuccess, setScanSuccess] = useState(false);
 
@@ -17,6 +18,8 @@ const Scanner = () => {
         result = JSON.parse(data);
         isValidData(result) ? setScanSuccess(true) : setScanResult(false);
         setScanResult(result);
+        result.entered_at = dateformat(new Date(), "d mmm yyyy, hh:MM tt");
+        setVisitedPets([result, ...visitedPets]);
       } catch (e) {
         console.log(data);
         setScanResult(true);
