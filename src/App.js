@@ -1,12 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
 import Header from "./header/Header";
+import Register from "./register/Register";
+import Login from "./login/Login";
 import Pets from "./pets/Pets";
 import Dashboard from "./dashboard/Dashboard";
 import Scanner from "./scanner/Scanner";
+import Cookies from "universal-cookie";
 
 function App() {
-  const [activeTab, setActiveTab] = useState("dashboard");
+  const [activeTab, setActiveTab] = useState("login");
+
   const [visitedPets, setVisitedPets] = useState([
     {
       id: 0,
@@ -167,10 +171,49 @@ function App() {
     },
   ]);
 
+  const [store, setStore] = useState(null);
+
+  const logout = () => {
+    setStore(null);
+    setActiveTab("login");
+    const cookies = new Cookies();
+    cookies.remove("store");
+  };
+
+  useEffect(() => {
+    if (store === null) {
+      const cookies = new Cookies();
+      if (cookies.get("store")) {
+        setStore(cookies.get("store"));
+        setActiveTab("dashboard");
+      }
+    }
+  }, [store]);
+
   return (
     <div>
-      <Header activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === "dashboard" && <Dashboard pets={visitedPets} />}
+      <Header store={store} activeTab={activeTab} setActiveTab={setActiveTab} />
+      {activeTab === "register" && <Register />}
+      {activeTab === "login" && (
+        <Login setStore={setStore} setActiveTab={setActiveTab} />
+      )}
+
+      {store && (
+        <button
+          className="btn btn-primary logout"
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            logout();
+          }}
+        >
+          Logout
+        </button>
+      )}
+
+      {activeTab === "dashboard" && (
+        <Dashboard store={store} pets={visitedPets} />
+      )}
       {activeTab === "scanner" && (
         <Scanner visitedPets={visitedPets} setVisitedPets={setVisitedPets} />
       )}
